@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Kohler Brand Signature Palette */
+  --kohler-black: #111111;
+  --kohler-charcoal: #18181b;
+  --kohler-porcelain: #ffffff;
+  --kohler-brass: #c29b38;
+  --kohler-brass-hover: #b08928;
+  --kohler-brass-light: #faf5ea;
+  --kohler-brass-dark: #3a2e12;
+  --kohler-hydro: #0284c7;
+  --kohler-hydro-glow: #38bdf8;
+  --kohler-chrome: #71717a;
+}
+
+/* Kohler Custom Styling Utilities */
+.bg-kohler-black {
+  background-color: #111111;
+}
+
+.text-kohler-brass {
+  color: #c29b38;
+}
+
+.bg-kohler-brass {
+  background-color: #c29b38;
+}
+
+.border-kohler-brass {
+  border-color: #c29b38;
+}
