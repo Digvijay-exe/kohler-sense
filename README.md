@@ -3,7 +3,6 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > Autonomous, real-time IoT water monitoring, deterministic leak detection, predictive maintenance dispatch, and ESG sustainability intelligence for high-traffic commercial facilities. Developed under the **KOHLER-MITWPU AI Research Lab Program**.
 
@@ -170,12 +169,6 @@ npm run start
 | SC-04 | Dual-Flush Valve O-Ring Erosion | HARDWARE | Staff ADA Stall | Continuous bypass flagged after 60s idle |
 | SC-05 | Aerator Scale Obstruction | HARDWARE | Basin Sensor Faucet #2 | Low-flow alert generated with descaling SOP |
 | ... | *+15 additional scenarios* | *EXTREME / HYGIENE* | *Various Fixtures* | *PRD Matrix Verification* |
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
