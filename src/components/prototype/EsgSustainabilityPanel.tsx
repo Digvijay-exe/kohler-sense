@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { SustainabilityMetrics } from '../../types';
 import {
   Droplets,
-  DollarSign,
+  IndianRupee,
   Leaf,
   Clock,
   ShieldCheck,
@@ -32,7 +32,7 @@ export const EsgSustainabilityPanel: React.FC<Props> = ({ metrics, facilityName,
 ## 1. Executive Summary & KPIs
 * **Potable Water Saved**: ${metrics.totalWaterSavedLiters.toLocaleString()} Liters (${(metrics.totalWaterSavedLiters * 0.264172).toFixed(1)} Gallons)
 * **Uncontained Water Loss Prevented**: ${metrics.totalWaterWastedLiters.toFixed(1)} Liters
-* **Utility Tariff Savings**: $${metrics.utilitySavingsDollars.toFixed(2)} USD
+* **Utility Tariff Savings**: ₹${(metrics.utilitySavingsRupees ?? (metrics.utilitySavingsDollars ? metrics.utilitySavingsDollars * 84 : 3984)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} INR
 * **Scope 2 Carbon Emissions Avoided**: ${metrics.carbonAvoidedKg.toFixed(2)} kg CO2e
 * **Mean Time to Detect (MTTD)**: ${metrics.averageMttdSeconds} seconds (Target: < 90s)
 * **Mean Time to Resolve (MTTR)**: ${metrics.averageMttrMinutes} minutes (Target: < 120m)
@@ -44,7 +44,7 @@ export const EsgSustainabilityPanel: React.FC<Props> = ({ metrics, facilityName,
 - **Water Loss Integration**: Volumetric integration of high-frequency continuous flow readings during confirmed zero-occupancy intervals:
   $$\\text{Total Wasted} = \\sum Q(t) \\times \\Delta t$$
 - **Carbon Accounting**: Embodied energy and municipal water purification factor: $0.0003\\text{ kg CO}_2\\text{e / Liter}$.
-- **Tariff Modeling**: Blended municipal commercial water + sewer surcharge: $0.0038\\text{ USD / Liter}$.
+- **Tariff Modeling**: Commercial municipal water + sewer surcharge: ₹0.32 INR / Liter (₹320 per kL).
 
 ---
 
@@ -131,14 +131,14 @@ export const EsgSustainabilityPanel: React.FC<Props> = ({ metrics, facilityName,
             <span className="text-[10px] uppercase font-bold text-zinc-400 dark:text-zinc-500">
               Municipal Tariff Avoided
             </span>
-            <DollarSign className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
+            <IndianRupee className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
           </div>
           <div className="text-2xl font-extrabold text-zinc-900 dark:text-white font-mono">
-            ${metrics.utilitySavingsDollars.toFixed(2)}{' '}
-            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">USD</span>
+            ₹{(metrics.utilitySavingsRupees ?? (metrics.utilitySavingsDollars ? metrics.utilitySavingsDollars * 84 : 3984)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}
+            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">INR</span>
           </div>
           <div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1">
-            At $0.0038/L commercial water & sewer tariff
+            At ₹0.32/L commercial water & sewer tariff
           </div>
         </motion.div>
 

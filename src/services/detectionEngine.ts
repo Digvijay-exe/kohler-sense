@@ -133,12 +133,14 @@ export function calculateDynamicPriorityScore(
  * Water Wastage & Sustainability Integrator
  */
 export function calculateSustainabilityImpact(totalWastedLiters: number) {
-  // Commercial municipal water + sewer average rate: ~$0.0038 / Liter
+  // Commercial municipal water + sewer average rate in India: ~₹0.32 / Liter (approx ₹320 per kL)
+  const utilityCostRupees = totalWastedLiters * 0.32;
   const utilityCostDollars = totalWastedLiters * 0.0038;
   // Embodied potable water treatment carbon intensity: 0.0003 kg CO2e / Liter
   const carbonKg = totalWastedLiters * 0.0003;
 
   return {
+    utilityCostRupees,
     utilityCostDollars,
     carbonKg,
     waterGallons: totalWastedLiters * 0.264172,

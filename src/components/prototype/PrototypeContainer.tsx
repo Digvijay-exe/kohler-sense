@@ -101,6 +101,7 @@ export const PrototypeContainer: React.FC<PrototypeContainerProps> = ({ isDarkMo
     totalWaterConsumedLiters: 48200,
     totalWaterWastedLiters: 14.2,
     totalWaterSavedLiters: 12450,
+    utilitySavingsRupees: 3984.00,
     utilitySavingsDollars: 47.31,
     carbonAvoidedKg: 3.73,
     activeLeaksCount: 0,
@@ -250,6 +251,7 @@ export const PrototypeContainer: React.FC<PrototypeContainerProps> = ({ isDarkMo
             return {
               ...prev,
               totalWaterWastedLiters: newWasted,
+              utilitySavingsRupees: impact.utilityCostRupees,
               utilitySavingsDollars: impact.utilityCostDollars,
               carbonAvoidedKg: impact.carbonKg,
             };
@@ -488,15 +490,19 @@ export const PrototypeContainer: React.FC<PrototypeContainerProps> = ({ isDarkMo
     if (!inc) return;
 
     const parts = customSpec?.recommendedParts?.length
-      ? customSpec.recommendedParts.map((p) => ({ ...p, inStock: true }))
+      ? customSpec.recommendedParts.map((p) => ({
+          ...p,
+          inStock: true,
+          priceInr: p.priceInr || (p.sku === 'K-1067341' ? 3850 : p.sku === 'K-1032402' ? 1450 : p.sku === 'K-89010' ? 950 : 450),
+        }))
       : inc.estimatedWastageRateLpm > 10
       ? [
-          { sku: 'K-1067341', name: 'Kohler Flushometer Solenoid Assembly', quantity: 1, inStock: true },
-          { sku: 'K-1032402', name: 'EPDM Diaphragm Rebuild Kit', quantity: 1, inStock: true },
+          { sku: 'K-1067341', name: 'Kohler Flushometer Solenoid Assembly', quantity: 1, inStock: true, priceInr: 3850 },
+          { sku: 'K-1032402', name: 'EPDM Diaphragm Rebuild Kit', quantity: 1, inStock: true, priceInr: 1450 },
         ]
       : [
-          { sku: 'K-1032402', name: 'EPDM Diaphragm Rebuild Kit', quantity: 1, inStock: true },
-          { sku: 'K-4567-01', name: 'Viton O-Ring Kit', quantity: 1, inStock: true },
+          { sku: 'K-1032402', name: 'EPDM Diaphragm Rebuild Kit', quantity: 1, inStock: true, priceInr: 1450 },
+          { sku: 'K-4567-01', name: 'Viton O-Ring Kit', quantity: 1, inStock: true, priceInr: 450 },
         ];
 
     const newTicket: MaintenanceTicket = {

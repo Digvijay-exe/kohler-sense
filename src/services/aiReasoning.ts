@@ -10,6 +10,7 @@ export interface AiDiagnosisResponse {
     name: string;
     quantity: number;
     inStock?: boolean;
+    priceInr?: number;
   }[];
   estimatedRepairTimeMinutes: number;
   safetyPrecautions: string;
@@ -44,6 +45,7 @@ export async function requestAiIncidentDiagnosis(
           recommendedParts: (data.diagnosis.recommendedParts || []).map((p: any) => ({
             ...p,
             inStock: true,
+            priceInr: p.priceInr || (p.sku?.includes('1067341') ? 3850 : p.sku?.includes('1032402') ? 1450 : p.sku?.includes('89010') ? 950 : 650),
           })),
         };
       }
@@ -95,8 +97,8 @@ function getClientSideFallbackDiagnosis(incident: Partial<Incident>, device: Dev
         failureMechanism: 'Particulate obstruction jammed solenoid armature; main bleed valve unable to equalize hydraulic pilot pressure.',
         recommendedAction: 'Isolate control stop valve immediately. Disassemble bonnet, flush line for 10s, inspect valve seat, and replace solenoid cartridge assembly.',
         recommendedParts: [
-          { sku: 'K-1067341', name: 'Kohler Tripoint DC Solenoid Valve Assembly', quantity: 1, inStock: true },
-          { sku: 'K-1032402', name: 'Commercial Diaphragm Rebuild Kit (1.28 GPF)', quantity: 1, inStock: true },
+          { sku: 'K-1067341', name: 'Kohler Tripoint DC Solenoid Valve Assembly', quantity: 1, inStock: true, priceInr: 3850 },
+          { sku: 'K-1032402', name: 'Commercial Diaphragm Rebuild Kit (1.28 GPF)', quantity: 1, inStock: true, priceInr: 1450 },
         ],
         estimatedRepairTimeMinutes: 25,
         safetyPrecautions: 'Depressurize supply line before hex cap removal. Wear eye protection against potential 4.0 bar back-spray.',
@@ -111,8 +113,8 @@ function getClientSideFallbackDiagnosis(incident: Partial<Incident>, device: Dev
       failureMechanism: 'Degraded EPDM rubber diaphragm weeping through flexure tears; bypass orifice partially clogged with mineral calcite.',
       recommendedAction: 'Isolate control stop. Remove brass bonnet, inspect bypass orifice, clean seat, and install genuine Kohler chemical-resistant dual-filter diaphragm.',
       recommendedParts: [
-        { sku: 'K-1032402', name: 'Kohler EPDM Dual-Filtered Diaphragm Kit', quantity: 1, inStock: true },
-        { sku: 'K-4567-01', name: 'Viton O-Ring & Vacuum Breaker Gasket Kit', quantity: 1, inStock: true },
+        { sku: 'K-1032402', name: 'Kohler EPDM Dual-Filtered Diaphragm Kit', quantity: 1, inStock: true, priceInr: 1450 },
+        { sku: 'K-4567-01', name: 'Viton O-Ring & Vacuum Breaker Gasket Kit', quantity: 1, inStock: true, priceInr: 450 },
       ],
       estimatedRepairTimeMinutes: 15,
       safetyPrecautions: 'Turn stop valve clockwise until firmly seated. Relieve line pressure by triggering manual bypass button.',
@@ -128,9 +130,9 @@ function getClientSideFallbackDiagnosis(incident: Partial<Incident>, device: Dev
       failureMechanism: 'Flight passenger deplaning burst generated cumulative footfall, stall flushes, and handwashes exceeding safe hygiene thresholds.',
       recommendedAction: 'Dispatch custodial sanitation squad for Level-1 Turnaround Sanitization: disinfect high-touch stall latches, restock paper & soap, wipe lavatory counters.',
       recommendedParts: [
-        { sku: 'CL-501', name: 'Hospital-Grade Disinfectant Solution (5L Concentrate)', quantity: 1, inStock: true },
-        { sku: 'PP-204', name: 'Kohler Touchless Paper Towel Roll (Pack of 6)', quantity: 1, inStock: true },
-        { sku: 'SP-101', name: 'Kohler Foam Soap Refill 1000ml Pouch', quantity: 2, inStock: true },
+        { sku: 'CL-501', name: 'Hospital-Grade Disinfectant Solution (5L Concentrate)', quantity: 1, inStock: true, priceInr: 850 },
+        { sku: 'PP-204', name: 'Kohler Touchless Paper Towel Roll (Pack of 6)', quantity: 1, inStock: true, priceInr: 650 },
+        { sku: 'SP-101', name: 'Kohler Foam Soap Refill 1000ml Pouch', quantity: 2, inStock: true, priceInr: 380 },
       ],
       estimatedRepairTimeMinutes: 12,
       safetyPrecautions: 'Deploy floor signage: "Caution Wet Floor / Sanitization in Progress". Wear PPE gloves.',
@@ -146,8 +148,8 @@ function getClientSideFallbackDiagnosis(incident: Partial<Incident>, device: Dev
       failureMechanism: 'Internal cell resistance increased due to lifecycle aging; operating voltage dropped below sensor microcontroller stability threshold.',
       recommendedAction: 'Unscrew security screw on battery compartment. Replace with fresh Kohler 6V CR-P2 industrial lithium pack. Observe confirmation LED blink sequence.',
       recommendedParts: [
-        { sku: 'K-89010', name: 'Kohler Industrial 6V CR-P2 Lithium Battery Pack', quantity: 1, inStock: true },
-        { sku: 'K-3341-LENS', name: 'Tripoint IR Lens Protective Seal', quantity: 1, inStock: true },
+        { sku: 'K-89010', name: 'Kohler Industrial 6V CR-P2 Lithium Battery Pack', quantity: 1, inStock: true, priceInr: 950 },
+        { sku: 'K-3341-LENS', name: 'Tripoint IR Lens Protective Seal', quantity: 1, inStock: true, priceInr: 520 },
       ],
       estimatedRepairTimeMinutes: 10,
       safetyPrecautions: 'Verify polarity alignment. Do not mix new and used battery cells.',
@@ -162,7 +164,7 @@ function getClientSideFallbackDiagnosis(incident: Partial<Incident>, device: Dev
     failureMechanism: 'Actuation duration or hydraulic profile departed > 3.0 standard deviations from baseline rolling profile.',
     recommendedAction: 'Perform physical inspection of fixture, check supply line pressure, verify sensor window cleanliness, and test manual override actuation.',
     recommendedParts: [
-      { sku: 'K-10673-DIAG', name: 'Kohler Commercial Sensor Diagnostic Tool', quantity: 1, inStock: true },
+      { sku: 'K-10673-DIAG', name: 'Kohler Commercial Sensor Diagnostic Tool', quantity: 1, inStock: true, priceInr: 4200 },
     ],
     estimatedRepairTimeMinutes: 20,
     safetyPrecautions: 'Check supply pressure gauge before loosening fittings.',

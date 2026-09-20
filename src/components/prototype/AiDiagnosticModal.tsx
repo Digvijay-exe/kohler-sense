@@ -163,22 +163,30 @@ export const AiDiagnosticModal: React.FC<Props> = ({
                     </div>
 
                     <div className="space-y-2 mt-2">
-                      {diagnosis.recommendedParts.map((part, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center justify-between p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs"
-                        >
-                          <div>
-                            <div className="font-semibold text-zinc-900 dark:text-white">{part.name}</div>
-                            <div className="text-[10px] font-mono text-zinc-500">
-                              Kohler SKU: {part.sku} • Qty: {part.quantity}
+                      {diagnosis.recommendedParts.map((part, idx) => {
+                        const price = part.priceInr || (part.sku?.includes('1067341') ? 3850 : part.sku?.includes('1032402') ? 1450 : part.sku?.includes('89010') ? 950 : 450);
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs"
+                          >
+                            <div>
+                              <div className="font-semibold text-zinc-900 dark:text-white">{part.name}</div>
+                              <div className="text-[10px] font-mono text-zinc-500">
+                                Kohler SKU: {part.sku} • Qty: {part.quantity}
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono font-bold text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-900 px-2 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-800">
+                                ₹{price.toLocaleString('en-IN')}
+                              </span>
+                              <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                                In Central Stock
+                              </span>
                             </div>
                           </div>
-                          <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
-                            Available in Central Facility Inventory
-                          </span>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
 

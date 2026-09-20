@@ -241,7 +241,20 @@ export const IncidentDispatchManager: React.FC<Props> = ({
                           <div className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1">
                             Parts Staged:{' '}
                             <span className="font-mono text-zinc-800 dark:text-zinc-200">
-                              {ticket.recommendedParts.map((p) => `${p.name} [${p.sku}]`).join(', ')}
+                              {ticket.recommendedParts
+                                .map((p) => {
+                                  const price =
+                                    p.priceInr ||
+                                    (p.sku?.includes('1067341')
+                                      ? 3850
+                                      : p.sku?.includes('1032402')
+                                      ? 1450
+                                      : p.sku?.includes('89010')
+                                      ? 950
+                                      : 450);
+                                  return `${p.name} [${p.sku} • ₹${price.toLocaleString('en-IN')}]`;
+                                })
+                                .join(', ')}
                             </span>
                           </div>
                         </div>

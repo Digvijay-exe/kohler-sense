@@ -192,6 +192,7 @@ export interface MaintenanceTicket {
     name: string;
     quantity: number;
     inStock: boolean;
+    priceInr?: number;
   }[];
   workInstructions: string[];
   safetyNotes: string;
@@ -219,7 +220,8 @@ export interface SustainabilityMetrics {
   totalWaterConsumedLiters: number;
   totalWaterWastedLiters: number;
   totalWaterSavedLiters: number;
-  utilitySavingsDollars: number;
+  utilitySavingsRupees: number;
+  utilitySavingsDollars?: number;
   carbonAvoidedKg: number;
   activeLeaksCount: number;
   averageMttdSeconds: number; // Mean Time to Detect

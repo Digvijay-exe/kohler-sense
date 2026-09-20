@@ -50,7 +50,7 @@ High-Freq IoT      Deterministic      Wear & Loss       Dynamic Multi-      Work
 
 ### 6. Executive ESG & Sustainability Accounting
 - **Volumetric Water Accounting**: High-precision tracking of potable water saved vs. unmonitored facilities.
-- **Carbon Abatement & Utility Cost Modeling**: Computes Scope 2 emissions avoided ($0.0003\text{ kg CO}_2\text{e / Liter}$) and municipal commercial tariff savings ($0.0038\text{ USD / Liter}$).
+- **Carbon Abatement & Utility Cost Modeling**: Computes Scope 2 emissions avoided ($0.0003\text{ kg CO}_2\text{e / Liter}$) and municipal commercial tariff savings ($\approx ₹0.32\text{ INR / Liter}$, or ₹320 per kL).
 - **Instant Report Export**: One-click generation and download of formatted Executive ESG Audit reports in Markdown.
 
 ---
